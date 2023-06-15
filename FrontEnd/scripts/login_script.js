@@ -35,7 +35,7 @@ function submitForm(event) {
         authToken = responseData.token;
         document.getElementById('message').textContent = 'Connexion réussie !';
  
-        //userId et authToken peuvent être utilisés, ajoutés à une variable ect ici
+        //userId et authToken peuvent être utilisés, stockés dans une variable ect ici
 
       })
       .catch(error => {
