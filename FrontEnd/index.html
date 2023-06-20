@@ -16,6 +16,7 @@
 
   <body>
     <script src="scripts/call_api.js"></script>
+    <script src="scripts/modal_script.js"></script>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -53,8 +54,18 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <div id="button_container">
+
+        <button id="modal_trigger">modifier</button>
+
+        <div id="modal" class="modal">
+          <div class="modal_content">
+            <h2>Titre de la modale</h2>
+            <p>Contenu de la modale...</p>
+            <button id="modal_close">Fermer</button>
+          </div>
         </div>
+
+        <div id="button_container"></div>
         <div class="gallery" id="gallery"></div>
       </section>
       <section id="contact">

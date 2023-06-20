@@ -4,9 +4,8 @@ function submitForm(event) {
   event.preventDefault();
 
   const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const password = document.getElementById('password').value; //ici 'email' et 'password' sont les ID concernés, situés dans la balise "input" du form de login_page.html
 
-  if (email === 'sophie.bluel@test.tld' && password === 'S0phie') {
     const data = {
       email: email,
       password: password
@@ -33,7 +32,7 @@ function submitForm(event) {
       .then(responseData => {
         const userId = responseData.userId;
         authToken = responseData.token;
-        document.getElementById('message').textContent = 'Connexion réussie !';
+        window.location.href = "index.html";
  
         //userId et authToken peuvent être utilisés, stockés dans une variable ect ici
 
@@ -42,11 +41,4 @@ function submitForm(event) {
         console.error('Erreur de la requête:', error);
         document.getElementById('message').textContent = error.message;
       });
-  } else {
-    if (email !== 'sophie.bluel@test.tld') {
-        document.getElementById('message').textContent = 'Email incorrect. Veuillez réessayer.';
-      } else if (password !== 'S0phie') {
-        document.getElementById('message').textContent = 'Mot de passe incorrect. Veuillez réessayer.';
-      }
-  }
 }
