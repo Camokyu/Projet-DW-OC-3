@@ -46,7 +46,7 @@ function submitForm(event) {
       .catch(error => {
         console.error('Erreur de la requête:', error);
         document.getElementById('message').textContent = error.message;
-        //remove le token en utilisant la fonction removeToken dans utils.js (NOTE : elle sert aussi pour le logout qui remplace le login quand connecté)
+        localStorage.removeItem('token')
         // utils.js comprend aussi, notamment, la fonction fetchData ainsi que get localStorage token
       });
 }
