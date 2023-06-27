@@ -14,7 +14,7 @@ if (token) {
     console.log(decoded);
     if (decoded.role === 'admin') {
       // L'utilisateur est authentifié en tant qu'administrateur
-      // Vous pouvez activer les fonctionnalités réservées aux administrateurs ici
+      //Coder les permissions accordées en conséquence ici
     } else {
       // L'utilisateur n'a pas les autorisations d'administrateur
       // Rediriger ou afficher un message d'erreur approprié

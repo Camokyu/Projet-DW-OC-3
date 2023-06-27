@@ -35,11 +35,11 @@ function submitForm(event) {
         const userId = responseData.userId;
         authToken = responseData.token;
         if(responseData.userId && responseData.token){
-          //stocker le token en localStorage
+          localStorage.setItem('token')
           window.location.href = "index.html";
         }
         else{
-          //remove le token en utilisant la fonction removeToken dans utils.js
+          localStorage.removeItem('token')
         }
         console.log(responseData);
         
