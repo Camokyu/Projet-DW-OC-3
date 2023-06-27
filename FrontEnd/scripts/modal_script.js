@@ -1,4 +1,4 @@
-if(decoded.role===admin){
+if(isConnected){
 document.addEventListener('DOMContentLoaded', function() {
 var modalTrigger = document.getElementById('modal_trigger');
 var modal = document.getElementById('modal');
@@ -13,4 +13,5 @@ modalClose.addEventListener('click', function() {
   modal.style.display = 'none';
 });
 });
+console.log('travaux', worksArray);
 }

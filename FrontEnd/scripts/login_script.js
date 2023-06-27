@@ -20,8 +20,6 @@ function submitForm(event) {
     })
       .then(response => {
         if (response.status === 200) {
-          const decoded = jwt.verify(token, secretKey);
-          console.log(decoded);
           return response.json();
         } else if (response.status === 404) {
           throw new Error('Utilisateur non trouvé.');
@@ -35,7 +33,7 @@ function submitForm(event) {
         const userId = responseData.userId;
         authToken = responseData.token;
         if(responseData.userId && responseData.token){
-          localStorage.setItem('token')
+          localStorage.setItem('token', authToken)
           window.location.href = "index.html";
         }
         else{
