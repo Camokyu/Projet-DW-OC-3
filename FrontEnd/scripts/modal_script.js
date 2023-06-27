@@ -1,3 +1,4 @@
+if(decoded.role===admin){
 document.addEventListener('DOMContentLoaded', function() {
 var modalTrigger = document.getElementById('modal_trigger');
 var modal = document.getElementById('modal');
@@ -12,4 +13,4 @@ modalClose.addEventListener('click', function() {
   modal.style.display = 'none';
 });
 });
-
+}

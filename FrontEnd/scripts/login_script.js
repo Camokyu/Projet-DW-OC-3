@@ -20,6 +20,8 @@ function submitForm(event) {
     })
       .then(response => {
         if (response.status === 200) {
+          const decoded = jwt.verify(token, secretKey);
+          console.log(decoded);
           return response.json();
         } else if (response.status === 404) {
           throw new Error('Utilisateur non trouvé.');
@@ -32,13 +34,21 @@ function submitForm(event) {
       .then(responseData => {
         const userId = responseData.userId;
         authToken = responseData.token;
-        window.location.href = "index.html";
- 
-        //userId et authToken peuvent être utilisés, stockés dans une variable ect ici
+        if(responseData.userId && responseData.token){
+          //stocker le token en localStorage
+          window.location.href = "index.html";
+        }
+        else{
+          //remove le token en utilisant la fonction removeToken dans utils.js
+        }
+        console.log(responseData);
+        
 
       })
       .catch(error => {
         console.error('Erreur de la requête:', error);
         document.getElementById('message').textContent = error.message;
+        //remove le token en utilisant la fonction removeToken dans utils.js (NOTE : elle sert aussi pour le logout qui remplace le login quand connecté)
+        // utils.js comprend aussi, notamment, la fonction fetchData ainsi que get localStorage token
       });
 }
