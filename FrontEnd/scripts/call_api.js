@@ -2,11 +2,11 @@ const isConnected = checkToken();
 console.log("🚀 ~ file: call_api.js:2 ~ isConnected:", isConnected);
 let worksArray = [];
 
+function displayWorks() {
 fetch("http://localhost:5678/api/works")
   .then((response) => response.json())
   .then((data) => {
     worksArray = data;
-    function displayWorks() {
       worksArray.forEach((item) => {
         let title = item.title;
         let imageUrl = item.imageUrl;
@@ -29,8 +29,8 @@ fetch("http://localhost:5678/api/works")
         galleryDiv.appendChild(figure);
         return console.log('travaux', worksArray);
       });
-    }
-  });
+    });
+  }
 
 if (!isConnected) {
   fetch("http://localhost:5678/api/categories")
@@ -93,8 +93,8 @@ if (!isConnected) {
         displayWorks();
 
         figureContainer.innerHTML = "";
+        setActiveButton(-1);
 
-       
       });
 
       const firstButton = buttonContainer.firstChild;
