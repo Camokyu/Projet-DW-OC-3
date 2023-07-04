@@ -1,127 +1,101 @@
+let WORKS;
 const isConnected = checkToken();
 console.log("🚀 ~ file: call_api.js:2 ~ isConnected:", isConnected);
-let worksArray = [];
 
-function displayWorks() {
-fetch("http://localhost:5678/api/works")
-  .then((response) => response.json())
-  .then((data) => {
-    worksArray = data;
-      worksArray.forEach((item) => {
-        let title = item.title;
-        let imageUrl = item.imageUrl;
+getWorks().then()
 
-        let figure = document.createElement("figure");
+getData("http://localhost:5678/api/works").then((data) => {
+  if (!isConnected) {
+    getData("http://localhost:5678/api/categories")
+      .then((dataCategories) => {
+        let worksArray;
+        worksArray = data;
+        console.log("worksArray", worksArray);
+        const buttonContainer = document.getElementById("button_container");
 
-        let img = document.createElement("img");
-        img.src = imageUrl;
-        img.alt = title;
+        const figureContainer = document.getElementById("gallery");
 
-        let figcaption = document.createElement("figcaption");
-        figcaption.textContent = title;
+        const buttons = dataCategories.map((category, index) => {
+          const button = document.createElement("button");
 
-        figure.appendChild(img);
+          button.textContent = category.name;
 
-        figure.appendChild(figcaption);
+          button.addEventListener("click", () => {
+            const filteredImages = worksArray.filter(
+              (work) => work.category.name == category.name
+            );
+            console.log(filteredImages);
 
-        let galleryDiv = document.getElementById("gallery");
+            setActiveButton(index);
 
-        galleryDiv.appendChild(figure);
-        return console.log('travaux', worksArray);
-      });
-    });
-  }
+            figureContainer.innerHTML = "";
 
-if (!isConnected) {
-  fetch("http://localhost:5678/api/categories")
-    .then((response) => response.json())
-    .then((dataCategories) => {
-      const buttonContainer = document.getElementById("button_container");
+            filteredImages.forEach((item) => {
+              let title = item.title;
+              let imageUrl = item.imageUrl;
 
-      const figureContainer = document.getElementById("gallery");
+              let figure = document.createElement("figure");
 
-      const buttons = dataCategories.map((category, index) => {
-        const button = document.createElement("button");
+              let img = document.createElement("img");
+              img.src = imageUrl;
+              img.alt = title;
 
-        button.textContent = category.name;
+              let figcaption = document.createElement("figcaption");
+              figcaption.textContent = title;
 
-        button.addEventListener("click", () => {
-          const filteredImages = worksArray.filter(
-            (work) => work.category.name == category.name
-          );
-          console.log(filteredImages);
+              figure.appendChild(img);
 
-          setActiveButton(index);
+              figure.appendChild(figcaption);
+
+              let targetHTML = document.getElementById("gallery");
+
+              targetHTML.appendChild(figure);
+            });
+          });
+
+          buttonContainer.appendChild(button);
+
+          return button;
+        });
+
+        const buttonTous = document.createElement("button");
+
+        buttonTous.textContent = "Tous";
+
+        buttonTous.addEventListener("click", () => {
+          displayWorks("gallery");
 
           figureContainer.innerHTML = "";
+          setActiveButton(-1);
+        });
 
-          filteredImages.forEach((item) => {
-            let title = item.title;
-            let imageUrl = item.imageUrl;
+        const firstButton = buttonContainer.firstChild;
+        buttonContainer.insertBefore(buttonTous, firstButton);
 
-            let figure = document.createElement("figure");
+        worksArray = displayWorks("gallery");
+        console.log("travaux :", worksArray);
 
-            let img = document.createElement("img");
-            img.src = imageUrl;
-            img.alt = title;
-
-            let figcaption = document.createElement("figcaption");
-            figcaption.textContent = title;
-
-            figure.appendChild(img);
-
-            figure.appendChild(figcaption);
-
-            let galleryDiv = document.getElementById("gallery");
-
-            galleryDiv.appendChild(figure);
+        function setActiveButton(activeIndex) {
+          buttons.forEach((button, index) => {
+            if (index === activeIndex) {
+              button.classList.add("active");
+            } else {
+              button.classList.remove("active");
+            }
           });
-        });
-
-        buttonContainer.appendChild(button);
-
-        return button;
-      });
-
-//À CORRIGER bouton Tous
-
-      const buttonTous = document.createElement("button");
-
-      buttonTous.textContent = "Tous";
-
-      buttonTous.addEventListener("click", () => {
-        displayWorks();
-
-        figureContainer.innerHTML = "";
-        setActiveButton(-1);
-
-      });
-
-      const firstButton = buttonContainer.firstChild;
-      buttonContainer.insertBefore(buttonTous, firstButton);
-
-      buttonTous.click();
-
-      function setActiveButton(activeIndex) {
-        buttons.forEach((button, index) => {
-          if (index === activeIndex) {
-            button.classList.add("active");
+          if (activeIndex === -1) {
+            buttonTous.classList.add("active");
           } else {
-            button.classList.remove("active");
+            buttonTous.classList.remove("active");
           }
-        });
-        if (activeIndex === -1) {
-          buttonTous.classList.add("active");
-        } else {
-          buttonTous.classList.remove("active");
         }
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-else{
-  displayWorks();
-  //gestion logout, boutons Modifier, bandeau mode édition en haut
-}
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } else {
+    const worksArray = displayWorks("gallery");
+    console.log("travaux :", worksArray);
+    //gestion logout, boutons Modifier, bandeau mode édition en haut
+  }
+});

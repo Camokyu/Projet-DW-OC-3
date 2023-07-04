@@ -242,3 +242,11 @@ footer nav ul {
 	align-content: center;
 	gap: 20px;
   }
+
+  #modal_trigger{
+	display: none;
+  }
+
+  #logout_button{
+	display: none;
+  }

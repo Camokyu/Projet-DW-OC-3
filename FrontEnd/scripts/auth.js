@@ -1,11 +1,15 @@
-const checkToken = () =>{
-  let currentToken = localStorage.getItem('token');
+const checkToken = () => {
+  let currentToken = localStorage.getItem("token");
   let result;
-  if(currentToken?.length){
+  if (currentToken?.length) {
     result = true;
-  }
-  else{
+  } else {
     result = false;
   }
   return result;
+};
+
+function removeToken() {
+  localStorage.removeItem("token");
+  window.location.reload(false);
 }
