@@ -36,3 +36,33 @@ const getData = async (url) => {
 function getWorks() {
   return getData("http://localhost:5678/api/works");
 }
+
+function getCategories() {
+    return getData("http://localhost:5678/api/categories");
+  }
+
+  createCategoryButton
+
+
+
+  createWorkElement(work){
+  let title = item.title;
+  let imageUrl = item.imageUrl;
+
+  let figure = document.createElement("figure");
+
+  let img = document.createElement("img");
+  img.src = imageUrl;
+  img.alt = title;
+
+  let figcaption = document.createElement("figcaption");
+  figcaption.textContent = title;
+
+  figure.appendChild(img);
+
+  figure.appendChild(figcaption);
+
+  let targetHTML = document.getElementById("gallery");
+
+  targetHTML.appendChild(figure);
+  }

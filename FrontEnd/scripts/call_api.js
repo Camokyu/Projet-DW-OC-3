@@ -2,7 +2,14 @@ let WORKS;
 const isConnected = checkToken();
 console.log("🚀 ~ file: call_api.js:2 ~ isConnected:", isConnected);
 
-getWorks().then()
+getData("http://localhost:5678/api/categories")
+     .then((dataCategories) => {
+       dataCategories.forEach(createCategoryButton)
+     })        
+getWorks().then((data) => {
+ WORKS = data; 
+ data.forEach(createWorkElement)
+})
 
 getData("http://localhost:5678/api/works").then((data) => {
   if (!isConnected) {
