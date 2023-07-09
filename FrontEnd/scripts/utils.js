@@ -33,19 +33,27 @@ const getData = async (url) => {
 
 //méthode init qui initialise le site, donc doit récupérer categories et works
 
+function onLaunch() {
+  getCategories();
+  getWorks();
+}
+
 function getWorks() {
   return getData("http://localhost:5678/api/works");
 }
 
 function getCategories() {
-    return getData("http://localhost:5678/api/categories");
-  }
+  return getData("http://localhost:5678/api/categories");
+}
 
-  createCategoryButton
+function createCategoryButton(category) {
+  const buttonContainer = document.getElementById("button_container");
+    const button = document.createElement("button");
 
+    button.textContent = category.name;
+}
 
-
-  createWorkElement(work){
+function createWorkElement(work) {
   let title = item.title;
   let imageUrl = item.imageUrl;
 
@@ -65,4 +73,4 @@ function getCategories() {
   let targetHTML = document.getElementById("gallery");
 
   targetHTML.appendChild(figure);
-  }
+}
