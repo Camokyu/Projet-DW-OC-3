@@ -30,19 +30,31 @@ function createWorkElement(work) {
   let figcaption = document.createElement("figcaption");
   figcaption.textContent = title;
 
-  figure.appendChild(img);
+  figure.append(img);
 
-  figure.appendChild(figcaption);
+  figure.append(figcaption);
 
   let targetHTML = document.getElementById("gallery");
+  console.log(
+    "🚀 ~ file: utils.js:38 ~ createWorkElement ~ targetHTML:",
+    targetHTML
+  );
 
-  targetHTML.appendChild(figure);
+  targetHTML.append(figure);
 }
 
 function createCategoryButton(category) {
   const buttonContainer = document.getElementById("button_container");
   const button = document.createElement("button");
-
+  if (category.id === 0) {
+    button.classList.add("active");
+  }
+  button.addEventListener("click", () => selectCategory(category.id));
   button.textContent = category.name;
   buttonContainer.appendChild(button);
+}
+
+function selectCategory(id){
+  console.log("🚀 ~ file: utils.js:58 ~ selectCategory ~ id:", id)
+  //piste possible : dataset
 }
