@@ -35,26 +35,46 @@ function createWorkElement(work) {
   figure.append(figcaption);
 
   let targetHTML = document.getElementById("gallery");
-  console.log(
-    "🚀 ~ file: utils.js:38 ~ createWorkElement ~ targetHTML:",
-    targetHTML
-  );
+  // console.log(
+  //   "🚀 ~ file: utils.js:38 ~ createWorkElement ~ targetHTML:",
+  //   targetHTML
+  // );
 
   targetHTML.append(figure);
 }
 
 function createCategoryButton(category) {
-  const buttonContainer = document.getElementById("button_container");
+  // const buttonContainer = document.getElementById("button_container");
   const button = document.createElement("button");
   if (category.id === 0) {
     button.classList.add("active");
   }
-  button.addEventListener("click", () => selectCategory(category.id));
+  // button.addEventListener("click", () => selectCategory(category.id));
   button.textContent = category.name;
-  buttonContainer.appendChild(button);
+  button.classList.add("btnJs");
+  button.dataset.id = category.id;
+  return button;
+  // buttonContainer.appendChild(button);
 }
 
-function selectCategory(id){
-  console.log("🚀 ~ file: utils.js:58 ~ selectCategory ~ id:", id)
-  //piste possible : dataset
+function getAndUpateCategory(ev) {
+  let allBtn = document.querySelectorAll(".btnJs");
+  allBtn.forEach((btn) => {
+    btn.classList.remove('active')
+    if (btn.dataset.id === ev.target.dataset.id) {
+      btn.classList.add('active')
+    }
+  });
+
+  return ev.target.dataset.id;
+}
+
+function filterWorksByCat(idCat, works) {
+  let worksFiltered = []
+  if(Number(idCat) === 0 ) {
+    worksFiltered = works
+  } else {
+    worksFiltered = works.filter(el => el.category.id === Number(idCat) )
+  }
+  return worksFiltered
 }
