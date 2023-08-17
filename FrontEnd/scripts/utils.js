@@ -35,26 +35,19 @@ function createWorkElement(work) {
   figure.append(figcaption);
 
   let targetHTML = document.getElementById("gallery");
-  // console.log(
-  //   "🚀 ~ file: utils.js:38 ~ createWorkElement ~ targetHTML:",
-  //   targetHTML
-  // );
 
   targetHTML.append(figure);
 }
 
 function createCategoryButton(category) {
-  // const buttonContainer = document.getElementById("button_container");
   const button = document.createElement("button");
   if (category.id === 0) {
     button.classList.add("active");
   }
-  // button.addEventListener("click", () => selectCategory(category.id));
   button.textContent = category.name;
   button.classList.add("btnJs");
   button.dataset.id = category.id;
   return button;
-  // buttonContainer.appendChild(button);
 }
 
 function getAndUpateCategory(ev) {
@@ -69,12 +62,24 @@ function getAndUpateCategory(ev) {
   return ev.target.dataset.id;
 }
 
+function displayFilteredWorks(event){
+  let selectedIdCat = getAndUpateCategory(event);
+        console.log("🚀 ~ file: call_api.js:15 ~ btn.addEventListener ~ event:", event)
+        let filteredWorks = filterWorksByCat(selectedIdCat, works);
+
+        let targetHTML = document.getElementById("gallery");
+        targetHTML.innerHTML = "";
+        filteredWorks.forEach((item) => {
+          createWorkElement(item);
+        });
+}
+
 function filterWorksByCat(idCat, works) {
-  let worksFiltered = []
+  let filteredWorks = []
   if(Number(idCat) === 0 ) {
-    worksFiltered = works
+    filteredWorks = works
   } else {
-    worksFiltered = works.filter(el => el.category.id === Number(idCat) )
+    filteredWorks = works.filter(el => el.category.id === Number(idCat) )
   }
-  return worksFiltered
+  return filteredWorks
 }

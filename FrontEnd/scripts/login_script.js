@@ -30,7 +30,6 @@ function submitForm(event) {
       }
     })
     .then((responseData) => {
-      //        const userId = responseData.userId;
       const authToken = responseData.token;
       localStorage.setItem("token", authToken);
       window.location.href = "index.html";
@@ -40,6 +39,5 @@ function submitForm(event) {
       console.error("Erreur de la requête:", error);
       document.getElementById("message").textContent = error.message;
       localStorage.removeItem("token");
-      // utils.js comprend aussi, notamment, la fonction fetchData ainsi que get localStorage token
     });
 }
