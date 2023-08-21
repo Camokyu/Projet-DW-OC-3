@@ -305,6 +305,13 @@ footer nav ul {
   border-radius: 10px;
 }
 
+#modal_gallery > figure{
+	display: block;
+	max-width: 15%;
+	max-height: 20%;
+	object-fit: contain;
+}
+
 button {
   font-family: "Syne";
   font-weight: 700;
