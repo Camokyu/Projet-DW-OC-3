@@ -18,7 +18,8 @@ function getCategories() {
   return getData("http://localhost:5678/api/categories");
 }
 
-function createWorkElement(work) {
+function createWorkElement(work, context = null) {
+ if(!context){
   let { title, imageUrl } = work;
 
   let figure = document.createElement("figure");
@@ -37,6 +38,10 @@ function createWorkElement(work) {
   let targetHTML = document.getElementById("gallery");
 
   targetHTML.append(figure);
+ }
+ else if(context === "modale" ){
+  console.log("modale");
+ }
 }
 
 function createCategoryButton(category) {

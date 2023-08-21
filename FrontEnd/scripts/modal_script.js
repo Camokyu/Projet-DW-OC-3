@@ -8,8 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
   modalTrigger.addEventListener("click", function () {
     modal.style.display = "block";
     console.log("Modale exécutée");
-    displayWorks("modal_body");
-
+    const modalGallery = document.getElementById("modal_gallery");
+//avoir les works en main pour utilisation, 
+// refacto createWorkElement (paramètre contexte, si contexte = modale créer icône poubelle portant l'ID de l'élément via dataset avec l'item, si contexte = null pas de modifs aka !context)
+//création du contenu de cette galerie,
+//styler le conteneur de la galerie selon la maquette,
   });
 
   modalClose.addEventListener("click", function () {
@@ -20,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     removeToken();
   });
 
-  if (isConnected === true) {
+  if (isConnected) {
     modalTrigger.style.display = "block";
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
