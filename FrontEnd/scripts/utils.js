@@ -40,6 +40,24 @@ function createWorkElement(work, context = null) {
   targetHTML.append(figure);
  }
  else if(context === "modale" ){
+  let { title, imageUrl } = work;
+
+  let figure = document.createElement("figure");
+
+  let img = document.createElement("img");
+  img.src = imageUrl;
+  img.alt = title;
+
+  let figcaption = document.createElement("figcaption");
+  figcaption.textContent = title;
+
+  figure.append(img);
+
+  figure.append(figcaption);
+
+  let targetHTML = document.getElementById("modal_gallery");
+
+  targetHTML.append(figure);
   console.log("modale");
  }
 }

@@ -1,14 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
   const modalTrigger = document.getElementById("modal_trigger");
   const modal = document.getElementById("modal");
+  const overlay = document.getElementById("overlay");
   const modalClose = document.getElementById("modal_close");
   const loginButton = document.getElementById("login_button");
   const logoutButton = document.getElementById("logout_button");
 
   modalTrigger.addEventListener("click", function () {
     modal.style.display = "block";
+    overlay.style.display = "block";
     console.log("Modale exécutée");
     const modalGallery = document.getElementById("modal_gallery");
+    window.works.forEach((item) => createWorkElement(item, "modale"));
+
+
 //avoir les works en main pour utilisation, 
 // refacto createWorkElement (paramètre contexte, si contexte = modale créer icône poubelle portant l'ID de l'élément via dataset avec l'item, si contexte = null pas de modifs aka !context)
 //création du contenu de cette galerie,
