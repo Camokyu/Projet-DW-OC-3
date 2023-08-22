@@ -19,47 +19,49 @@ function getCategories() {
 }
 
 function createWorkElement(work, context = null) {
- if(!context){
-  let { title, imageUrl } = work;
+  if (!context) {
+    let { title, imageUrl } = work;
 
-  let figure = document.createElement("figure");
+    let figure = document.createElement("figure");
 
-  let img = document.createElement("img");
-  img.src = imageUrl;
-  img.alt = title;
+    let img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = title;
 
-  let figcaption = document.createElement("figcaption");
-  figcaption.textContent = title;
+    let figcaption = document.createElement("figcaption");
+    figcaption.textContent = title;
 
-  figure.append(img);
+    figure.append(img);
 
-  figure.append(figcaption);
+    figure.append(figcaption);
 
-  let targetHTML = document.getElementById("gallery");
+    let targetHTML = document.getElementById("gallery");
 
-  targetHTML.append(figure);
- }
- else if(context === "modale" ){
-  let { title, imageUrl } = work;
+    targetHTML.append(figure);
+  } else if (context === "modale") {
+    let { title, imageUrl } = work;
 
-  let figure = document.createElement("figure");
+    let figure = document.createElement("figure");
+    let deleteItemBtn = document.createElement("span");
 
-  let img = document.createElement("img");
-  img.src = imageUrl;
-  img.alt = title;
+    let img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = title;
 
-  let figcaption = document.createElement("figcaption");
-  figcaption.textContent = title;
+    let figcaption = document.createElement("figcaption");
+    // NOTE On doit pouvoir supprimer un iten son nom n'est pas nécéssaire et pas demandé dans la maquette
+    deleteItemBtn.textContent = 'Delete';
 
-  figure.append(img);
+    figure.append(img);
+    figcaption.append(deleteItemBtn);
 
-  figure.append(figcaption);
+    figure.append(figcaption);
 
-  let targetHTML = document.getElementById("modal_gallery");
+    let targetHTML = document.getElementById("modal_gallery");
 
-  targetHTML.append(figure);
-  console.log("modale");
- }
+    targetHTML.append(figure);
+    console.log("modale");
+  }
 }
 
 function createCategoryButton(category) {
@@ -76,33 +78,36 @@ function createCategoryButton(category) {
 function getAndUpateCategory(ev) {
   let allBtn = document.querySelectorAll(".btnJs");
   allBtn.forEach((btn) => {
-    btn.classList.remove('active')
+    btn.classList.remove("active");
     if (btn.dataset.id === ev.target.dataset.id) {
-      btn.classList.add('active')
+      btn.classList.add("active");
     }
   });
 
   return ev.target.dataset.id;
 }
 
-function displayFilteredWorks(event){
+function displayFilteredWorks(event) {
   let selectedIdCat = getAndUpateCategory(event);
-        console.log("🚀 ~ file: call_api.js:15 ~ btn.addEventListener ~ event:", event)
-        let filteredWorks = filterWorksByCat(selectedIdCat, works);
+  console.log(
+    "🚀 ~ file: call_api.js:15 ~ btn.addEventListener ~ event:",
+    event
+  );
+  let filteredWorks = filterWorksByCat(selectedIdCat, works);
 
-        let targetHTML = document.getElementById("gallery");
-        targetHTML.innerHTML = "";
-        filteredWorks.forEach((item) => {
-          createWorkElement(item);
-        });
+  let targetHTML = document.getElementById("gallery");
+  targetHTML.innerHTML = "";
+  filteredWorks.forEach((item) => {
+    createWorkElement(item);
+  });
 }
 
 function filterWorksByCat(idCat, works) {
-  let filteredWorks = []
-  if(Number(idCat) === 0 ) {
-    filteredWorks = works
+  let filteredWorks = [];
+  if (Number(idCat) === 0) {
+    filteredWorks = works;
   } else {
-    filteredWorks = works.filter(el => el.category.id === Number(idCat) )
+    filteredWorks = works.filter((el) => el.category.id === Number(idCat));
   }
-  return filteredWorks
+  return filteredWorks;
 }

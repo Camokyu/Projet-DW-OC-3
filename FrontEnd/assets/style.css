@@ -304,12 +304,25 @@ footer nav ul {
   padding: 30px;
   border-radius: 10px;
 }
+/* NOTE */
+/* La gestion de l'alignement des items */
+#modal_gallery {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
 
 #modal_gallery > figure{
 	display: block;
 	max-width: 15%;
 	max-height: 20%;
 	object-fit: contain;
+}
+
+/* NOTE */
+/* La gestion de la taille des photos */
+#modal_gallery > figure img {
+  width: 100%;
 }
 
 button {
