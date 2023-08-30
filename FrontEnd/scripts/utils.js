@@ -42,18 +42,18 @@ function createWorkElement(work, context = null) {
     let { title, imageUrl } = work;
 
     let figure = document.createElement("figure");
-    let deleteItemBtn = document.createElement("span");
+    let editItemButton = document.createElement("span");
 
     let img = document.createElement("img");
     img.src = imageUrl;
     img.alt = title;
 
     let figcaption = document.createElement("figcaption");
-    // NOTE On doit pouvoir supprimer un iten son nom n'est pas nécéssaire et pas demandé dans la maquette
-    deleteItemBtn.textContent = 'Delete';
+    // NOTE On doit pouvoir supprimer un item son nom n'est pas nécéssaire et pas demandé dans la maquette
+    editItemButton.textContent = 'éditer';
 
     figure.append(img);
-    figcaption.append(deleteItemBtn);
+    figcaption.append(editItemButton);
 
     figure.append(figcaption);
 
@@ -110,4 +110,8 @@ function filterWorksByCat(idCat, works) {
     filteredWorks = works.filter((el) => el.category.id === Number(idCat));
   }
   return filteredWorks;
+}
+
+function deleteWork(){
+
 }

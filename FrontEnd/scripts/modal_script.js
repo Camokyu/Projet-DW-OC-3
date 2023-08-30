@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.style.display = "block";
     console.log("Modale exécutée");
     const modalGallery = document.getElementById("modal_gallery");
-    // NOTE on doit vider la modale des contenus déjà présent
+    // NOTE on doit vider la modale des contenus déjà présents
     modalGallery.innerHTML = ""
     window.works.forEach((item) => createWorkElement(item, "modale"));
 

@@ -314,7 +314,7 @@ footer nav ul {
 
 #modal_gallery > figure{
 	display: block;
-	max-width: 15%;
+	max-width: 17%;
 	max-height: 20%;
 	object-fit: contain;
 }
