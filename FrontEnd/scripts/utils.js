@@ -49,7 +49,6 @@ function createWorkElement(work, context = null) {
     img.alt = title;
 
     let figcaption = document.createElement("figcaption");
-    // NOTE On doit pouvoir supprimer un item son nom n'est pas nécéssaire et pas demandé dans la maquette
     editItemButton.textContent = 'éditer';
 
     figure.append(img);
@@ -112,6 +111,6 @@ function filterWorksByCat(idCat, works) {
   return filteredWorks;
 }
 
-function deleteWork(){
+// function deleteWork(){
 
-}
+// }

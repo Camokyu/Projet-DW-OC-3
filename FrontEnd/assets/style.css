@@ -304,8 +304,7 @@ footer nav ul {
   padding: 30px;
   border-radius: 10px;
 }
-/* NOTE */
-/* La gestion de l'alignement des items */
+
 #modal_gallery {
   display: flex;
   gap: .5rem;
@@ -319,8 +318,6 @@ footer nav ul {
 	object-fit: contain;
 }
 
-/* NOTE */
-/* La gestion de la taille des photos */
 #modal_gallery > figure img {
   width: 100%;
 }
@@ -361,3 +358,12 @@ button {
 #logout_button {
   display: none;
 }
+
+#banner_container{
+  display: none;
+  max-width: 1440px;
+}
+
+/* #edit_mode_banner{
+
+} */

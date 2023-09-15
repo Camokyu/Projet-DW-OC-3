@@ -1,5 +1,6 @@
 const isConnected = checkToken();
 console.log("🚀 ~ file: call_api.js:2 ~ isConnected:", isConnected);
+const bannerContainer = document.getElementById("banner_container");
 
 onLaunch().then(({ categories, works }) => {
   window.works = works;
@@ -15,3 +16,7 @@ onLaunch().then(({ categories, works }) => {
     });
   }
 });
+
+if (isConnected) {
+  bannerContainer.style.display = "block";
+}
