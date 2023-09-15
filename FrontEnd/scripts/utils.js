@@ -18,43 +18,99 @@ function getCategories() {
   return getData("http://localhost:5678/api/categories");
 }
 
-function createWorkElement(work) {
-  let { title, imageUrl } = work;
+function createWorkElement(work, context = null) {
+  if (!context) {
+    let { title, imageUrl } = work;
 
-  let figure = document.createElement("figure");
+    let figure = document.createElement("figure");
 
-  let img = document.createElement("img");
-  img.src = imageUrl;
-  img.alt = title;
+    let img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = title;
 
-  let figcaption = document.createElement("figcaption");
-  figcaption.textContent = title;
+    let figcaption = document.createElement("figcaption");
+    figcaption.textContent = title;
 
-  figure.append(img);
+    figure.append(img);
 
-  figure.append(figcaption);
+    figure.append(figcaption);
 
-  let targetHTML = document.getElementById("gallery");
-  console.log(
-    "🚀 ~ file: utils.js:38 ~ createWorkElement ~ targetHTML:",
-    targetHTML
-  );
+    let targetHTML = document.getElementById("gallery");
 
-  targetHTML.append(figure);
+    targetHTML.append(figure);
+  } else if (context === "modale") {
+    let { title, imageUrl } = work;
+
+    let figure = document.createElement("figure");
+    let editItemButton = document.createElement("span");
+
+    let img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = title;
+
+    let figcaption = document.createElement("figcaption");
+    editItemButton.textContent = 'éditer';
+
+    figure.append(img);
+    figcaption.append(editItemButton);
+
+    figure.append(figcaption);
+
+    let targetHTML = document.getElementById("modal_gallery");
+
+    targetHTML.append(figure);
+    console.log("modale");
+  }
 }
 
 function createCategoryButton(category) {
-  const buttonContainer = document.getElementById("button_container");
   const button = document.createElement("button");
   if (category.id === 0) {
     button.classList.add("active");
   }
-  button.addEventListener("click", () => selectCategory(category.id));
   button.textContent = category.name;
-  buttonContainer.appendChild(button);
+  button.classList.add("btnJs");
+  button.dataset.id = category.id;
+  return button;
 }
 
-function selectCategory(id){
-  console.log("🚀 ~ file: utils.js:58 ~ selectCategory ~ id:", id)
-  //piste possible : dataset
+function getAndUpateCategory(ev) {
+  let allBtn = document.querySelectorAll(".btnJs");
+  allBtn.forEach((btn) => {
+    btn.classList.remove("active");
+    if (btn.dataset.id === ev.target.dataset.id) {
+      btn.classList.add("active");
+    }
+  });
+
+  return ev.target.dataset.id;
 }
+
+function displayFilteredWorks(event) {
+  let selectedIdCat = getAndUpateCategory(event);
+  console.log(
+    "🚀 ~ file: call_api.js:15 ~ btn.addEventListener ~ event:",
+    event
+  );
+  let filteredWorks = filterWorksByCat(selectedIdCat, works);
+
+  let targetHTML = document.getElementById("gallery");
+  targetHTML.innerHTML = "";
+  filteredWorks.forEach((item) => {
+    createWorkElement(item);
+  });
+}
+
+function filterWorksByCat(idCat, works) {
+  let filteredWorks = [];
+  if (Number(idCat) === 0) {
+    filteredWorks = works;
+  } else {
+    filteredWorks = works.filter((el) => el.category.id === Number(idCat));
+  }
+  return filteredWorks;
+}
+
+// function deleteWork(){
+
+// }
