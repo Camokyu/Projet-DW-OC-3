@@ -358,12 +358,3 @@ button {
 #logout_button {
   display: none;
 }
-
-#banner_container{
-  display: none;
-  max-width: 1440px;
-}
-
-/* #edit_mode_banner{
-
-} */

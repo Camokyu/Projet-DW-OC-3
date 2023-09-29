@@ -16,7 +16,3 @@ onLaunch().then(({ categories, works }) => {
     });
   }
 });
-
-if (isConnected) {
-  bannerContainer.style.display = "block";
-}
