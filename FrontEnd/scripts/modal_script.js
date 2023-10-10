@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalClose = document.getElementById("modal_close");
   const loginButton = document.getElementById("login_button");
   const logoutButton = document.getElementById("logout_button");
+  const editModeBanner = document.getElementById("edit_mode_banner");
+  const modalForm = document.getElementById("modal_form");
 
   modalTrigger.addEventListener("click", function () {
     modal.style.display = "block";
@@ -28,5 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     modalTrigger.style.display = "block";
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
+    editModeBanner.style.display = "block";
   }
 });
