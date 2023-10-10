@@ -1,35 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
+  function closeModal() {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+  }
+
+  function openModal() {
+    modal.style.display = "flex";
+    overlay.style.display = "block";
+  }
+
+  function logout() {
+    removeAuthToken();
+  }
+
   const modalTrigger = document.getElementById("modal_trigger");
   const modal = document.getElementById("modal");
   const overlay = document.getElementById("overlay");
-  const modalClose = document.getElementById("modal_close");
+  const modalClose = document.getElementById("modal_close_icon");
   const loginButton = document.getElementById("login_button");
   const logoutButton = document.getElementById("logout_button");
   const editModeBanner = document.getElementById("edit_mode_banner");
   const modalForm = document.getElementById("modal_form");
+  const openForm = document.getElementById("open_form");
 
-  modalTrigger.addEventListener("click", function () {
-    modal.style.display = "block";
-    overlay.style.display = "block";
-    console.log("Modale exécutée");
-    const modalGallery = document.getElementById("modal_gallery");
-    modalGallery.innerHTML = ""
-    window.works.forEach((item) => createWorkElement(item, "modale"));
-  });
+  modalTrigger.addEventListener("click",openModal);
 
-  modalClose.addEventListener("click", function () {
-    modal.style.display = "none";
-    overlay.style.display = "none";
-  });
+  modalClose.addEventListener("click", closeModal);
+  overlay.addEventListener("click", closeModal);
 
-  logoutButton.addEventListener("click", function () {
-    removeToken();
-  });
+  logoutButton.addEventListener("click", logout);
 
-  if (isConnected) {
+  if (getIsConnected()) {
     modalTrigger.style.display = "block";
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
-    editModeBanner.style.display = "block";
+    editModeBanner.style.display = "flex";
   }
 });

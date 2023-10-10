@@ -18,49 +18,44 @@ function getCategories() {
   return getData("http://localhost:5678/api/categories");
 }
 
-function createWorkElement(work, context = null) {
-  if (!context) {
-    let { title, imageUrl } = work;
+function createWorkElements(works) {
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = ''
+  
+  const modalGallery = document.getElementById("modal_gallery");
+  modalGallery.innerHTML = ''
+  
+  works.forEach((item) => createWorkElement(item));
+}
 
-    let figure = document.createElement("figure");
+function createWorkElement(work) {
+  const { title, imageUrl } = work;
 
-    let img = document.createElement("img");
-    img.src = imageUrl;
-    img.alt = title;
+  const figure = document.createElement("figure");
+  const modalFigure = figure.cloneNode();
+  const img = document.createElement("img");
+  img.alt = title
+  img.src = imageUrl
+  const figcaption = document.createElement("figcaption");
+  figcaption.textContent = title
+  const deleteItemIcon = document.createElement("img");
+  deleteItemIcon.className = 'edit-icon';
+  deleteItemIcon.src = './assets/icons/delete_icon.png';
+  deleteItemIcon.onclick = (e) => {
+    e.preventDefault();
+    deleteWork(work.id);
+  };
 
-    let figcaption = document.createElement("figcaption");
-    figcaption.textContent = title;
+  const gallery = document.getElementById("gallery");
+  const modalGallery = document.getElementById("modal_gallery");
 
-    figure.append(img);
-
-    figure.append(figcaption);
-
-    let targetHTML = document.getElementById("gallery");
-
-    targetHTML.append(figure);
-  } else if (context === "modale") {
-    let { title, imageUrl } = work;
-
-    let figure = document.createElement("figure");
-    let editItemButton = document.createElement("span");
-
-    let img = document.createElement("img");
-    img.src = imageUrl;
-    img.alt = title;
-
-    let figcaption = document.createElement("figcaption");
-    editItemButton.textContent = 'éditer';
-
-    figure.append(img);
-    figcaption.append(editItemButton);
-
-    figure.append(figcaption);
-
-    let targetHTML = document.getElementById("modal_gallery");
-
-    targetHTML.append(figure);
-    console.log("modale");
-  }
+  figure.append(img);
+  figure.append(figcaption);
+  modalFigure.append(img.cloneNode());
+  modalFigure.append(deleteItemIcon);
+  
+  gallery.append(figure);
+  modalGallery.append(modalFigure);
 }
 
 function createCategoryButton(category) {
@@ -75,7 +70,7 @@ function createCategoryButton(category) {
 }
 
 function getAndUpateCategory(ev) {
-  let allBtn = document.querySelectorAll(".btnJs");
+  const allBtn = document.querySelectorAll(".btnJs");
   allBtn.forEach((btn) => {
     btn.classList.remove("active");
     if (btn.dataset.id === ev.target.dataset.id) {
@@ -87,14 +82,14 @@ function getAndUpateCategory(ev) {
 }
 
 function displayFilteredWorks(event) {
-  let selectedIdCat = getAndUpateCategory(event);
+  const selectedIdCat = getAndUpateCategory(event);
   console.log(
     "🚀 ~ file: call_api.js:15 ~ btn.addEventListener ~ event:",
     event
   );
-  let filteredWorks = filterWorksByCat(selectedIdCat, works);
+  const filteredWorks = filterWorksByCat(selectedIdCat, works);
 
-  let targetHTML = document.getElementById("gallery");
+  const targetHTML = document.getElementById("gallery");
   targetHTML.innerHTML = "";
   filteredWorks.forEach((item) => {
     createWorkElement(item);
@@ -102,15 +97,19 @@ function displayFilteredWorks(event) {
 }
 
 function filterWorksByCat(idCat, works) {
-  let filteredWorks = [];
-  if (Number(idCat) === 0) {
-    filteredWorks = works;
-  } else {
-    filteredWorks = works.filter((el) => el.category.id === Number(idCat));
-  }
-  return filteredWorks;
+  return Number(idCat) === 0
+    ? [...works]
+    : works.filter((el) => el.category.id === Number(idCat));
 }
 
-// function deleteWork(){
+async function deleteWork(workId){
+  await fetch(`http://localhost:5678/api/works/${workId}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": "JWT " + getAuthToken()
+    }
+  })
 
-// }
+  const works = await getWorks();
+  createWorkElements(works)
+}

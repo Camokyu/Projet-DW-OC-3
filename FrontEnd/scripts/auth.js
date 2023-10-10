@@ -1,15 +1,12 @@
-const checkToken = () => {
-  let currentToken = localStorage.getItem("token");
-  let result;
-  if (currentToken?.length) {
-    result = true;
-  } else {
-    result = false;
-  }
-  return result;
-};
+function getAuthToken() {
+  return localStorage.getItem("token")
+}
 
-function removeToken() {
+function getIsConnected() {
+  return Boolean(getAuthToken())
+}
+
+function removeAuthToken() {
   localStorage.removeItem("token");
   window.location.reload(false);
 }
