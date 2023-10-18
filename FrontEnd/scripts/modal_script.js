@@ -23,10 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalForm = document.getElementById("modal_form");
   const openForm = document.getElementById("open_form");
 
-  modalTrigger.addEventListener("click",openModal);
+  modalTrigger.addEventListener("click", openModal);
 
   modalClose.addEventListener("click", closeModal);
   overlay.addEventListener("click", closeModal);
+
+  openForm.addEventListener("click", openForm);
 
   logoutButton.addEventListener("click", logout);
 

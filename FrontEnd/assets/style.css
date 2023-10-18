@@ -391,12 +391,13 @@ button {
 .modal .modal-body {
   border-bottom: 1px solid #b3b3b3;
   padding-bottom: 80px;
-  margin: 0 90px;
+  margin: 0 80px;
 }
 
 .modal .modal-body #modal_gallery {
   display: flex;
-  gap: 2rem 0.5rem;
+  justify-content: space-between;
+  row-gap: 2rem;
   flex-wrap: wrap;
 }
 
@@ -420,7 +421,7 @@ button {
 }
 
 .modal .modal-body .modal_form {
-  display: none;
+  display: block;
 }
 
 .modal .modal-footer {
