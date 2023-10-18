@@ -68,8 +68,14 @@
 
         <div id="modal" class="modal">
           <div class="modal-header">
-            <div id="modal_close_icon"><img src="./assets/icons/x_mark_icon.png" alt="Close modal icon"></div>
-            <div id="modal_title">Galerie photo</div>
+            <div class="modal-controls">
+              <div class="modal-controls-previous"><img id="modal_previous_icon" src="./assets/icons/arrow-left.png" alt="Return to gallery management"></div>
+              <div class="modal-controls-close"><img id="modal_close_icon" src="./assets/icons/x_mark_icon.png" alt="Close modal icon"></div>
+            </div>
+            <div class="modal-title">
+              <div id="modal_gallery_title">Galerie photo</div>
+              <div id="modal_form_title">Ajout photo</div>
+            </div>
           </div>
           <div class="modal-body">
             <div id="modal_gallery"></div>
@@ -77,10 +83,10 @@
               <h2>Ajout photo</h2>
               <form></form>
             </div>
-
-            <div class="modal-footer">
-              <button id="submit_button">Ajouter une photo</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="submit_button">Ajouter une photo</button>
+            <button id="validate_button">Valider</button>
           </div>
         </div>
 

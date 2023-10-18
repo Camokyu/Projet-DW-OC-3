@@ -209,7 +209,7 @@ li:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  display: none;
+  display: block;
 }
 
 #portfolio h2 {
@@ -329,9 +329,9 @@ button {
 }
 
 #banner_content {
- display: flex;
- gap: 12px;
- align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 /* #banner_text {
@@ -344,7 +344,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 80%;
-  display: none;
+  display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 10px;
@@ -357,8 +357,8 @@ button {
   margin-bottom: 50px;
 }
 
-.modal .modal-header #modal_title {
-  font-family: 'Work Sans';
+.modal .modal-header .modal-title {
+  font-family: "Work Sans";
   font-size: 26px;
   font-weight: 400;
   line-height: 30px;
@@ -368,18 +368,36 @@ button {
   margin-top: 10px;
 }
 
-.modal .modal-header #modal_close_icon {
+.modal .modal-header .modal-title #modal_gallery_title {
+  display: block;
+}
+
+.modal .modal-header .modal-controls {
+  display: flex;
+}
+
+.modal .modal-header .modal-controls> div{
+  flex-grow: 1;
+}
+
+.modal .modal-header .modal-controls .modal-controls-previous {
+}
+
+.modal .modal-header .modal-controls .modal-controls-close {
   display: flex;
   justify-content: flex-end;
+}
+
+.modal .modal-body {
+  border-bottom: 1px solid #b3b3b3;
+  padding-bottom: 80px;
+  margin: 0 90px;
 }
 
 .modal .modal-body #modal_gallery {
   display: flex;
   gap: 2rem 0.5rem;
   flex-wrap: wrap;
-  border-bottom: 1px solid #B3B3B3;
-  padding-bottom: 80px;
-  margin: 0 90px;
 }
 
 .modal .modal-body #modal_gallery > figure {
@@ -395,10 +413,10 @@ button {
 }
 
 .modal .modal-body #modal_gallery .edit-icon {
-	position: absolute;
-	right: 5px;
-	top: 5px;
-	width: 17px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 17px;
 }
 
 .modal .modal-body .modal_form {
@@ -407,12 +425,15 @@ button {
 
 .modal .modal-footer {
   display: flex;
+  margin-top: 20px;
+}
+
+.modal .modal-footer button {
+  color: white;
+  background-color: #1d6154;
+  width: 40%;
 }
 
 .modal .modal-footer #submit_button {
-  color: white;
-  background-color: #1d6154;
-  padding-left: 55px;
-  padding-right: 55px;
-  margin-top: 40px;
+  display: block;
 }
