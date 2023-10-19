@@ -18,7 +18,7 @@
     <div id="overlay"></div>
     <div id="edit_mode_banner">
       <div id="banner_content">
-        <img src="./assets/icons/edit_icon.png"/>
+        <img src="./assets/icons/edit_icon.png" />
         <p id="banner_text">Mode édition</p>
       </div>
     </div>
@@ -69,8 +69,20 @@
         <div id="modal" class="modal">
           <div class="modal-header">
             <div class="modal-controls">
-              <div class="modal-controls-previous"><img id="modal_previous_icon" src="./assets/icons/arrow-left.png" alt="Return to gallery management"></div>
-              <div class="modal-controls-close"><img id="modal_close_icon" src="./assets/icons/x_mark_icon.png" alt="Close modal icon"></div>
+              <div class="modal-controls-previous">
+                <img
+                  id="modal_previous_icon"
+                  src="./assets/icons/arrow-left.png"
+                  alt="Return to gallery management"
+                />
+              </div>
+              <div class="modal-controls-close">
+                <img
+                  id="modal_close_icon"
+                  src="./assets/icons/x_mark_icon.png"
+                  alt="Close modal icon"
+                />
+              </div>
             </div>
             <div class="modal-title">
               <div id="modal_gallery_title">Galerie photo</div>
@@ -79,20 +91,35 @@
           </div>
           <div class="modal-body">
             <div id="modal_gallery"></div>
-            <div class="modal_form">
-              <form>
-                <label for="form_title_input">Titre</label>
-                <input type="text" id="form_title_input" required/>
-                <label for="form_category_select">Catégorie</label>
-                <select id="form_category_select">
-
-                </select>
+            <div id="modal_form_container">
+              <form id="modal_form">
+                <div>
+                  <div id="form_file_input_container">
+                    <img id="form_file_input_selected_image" alt="Selected image" />
+                    <div id="form_file_input_controls">
+                      <img alt="File input icon" src="./assets/images/file-input-image.png">
+                      <label for="form_file_input">+ Ajouter photo</label>
+                      <input id="form_file_input" name="image" type="file" accept=".jpg, .jpeg, .png" required />
+                      <span>jpg, png : 4mo max</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-container">
+                  <label for="form_title_input">Titre</label>
+                  <input type="text" id="form_title_input" name="title" required />
+                </div>
+                <div class="input-container">
+                  <label for="form_category_select">Catégorie</label>
+                  <select id="form_category_select" name="category" required>
+                    <option></option>
+                  </select>
+                </div>
               </form>
             </div>
           </div>
           <div class="modal-footer">
-            <button id="submit_button">Ajouter une photo</button>
-            <button id="validate_button">Valider</button>
+            <button id="open_form_buttom">Ajouter une photo</button>
+            <button id="submit_form_button">Valider</button>
           </div>
         </div>
 

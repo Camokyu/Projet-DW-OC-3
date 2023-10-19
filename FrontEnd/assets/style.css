@@ -139,6 +139,11 @@ header {
   justify-content: space-between;
   margin: 50px 0;
 }
+
+header nav li {
+  cursor: pointer;
+}
+
 section {
   margin: 50px 0;
 }
@@ -209,7 +214,7 @@ li:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  display: block;
+  display: none;
 }
 
 #portfolio h2 {
@@ -273,6 +278,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  cursor: pointer;
 }
 
 footer nav ul {
@@ -312,6 +318,7 @@ button {
 
 #modal_trigger {
   display: none;
+  cursor: pointer;
 }
 
 #logout_button {
@@ -344,13 +351,14 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 80%;
-  display: flex;
+  display: none;
   flex-direction: column;
   background-color: white;
   border-radius: 10px;
   width: 630px;
   padding: 20px;
   overflow: auto;
+  min-height: 700px;
 }
 
 .modal .modal-header {
@@ -372,6 +380,10 @@ button {
   display: block;
 }
 
+.modal .modal-header .modal-title #modal_form_title {
+  display: none;
+}
+
 .modal .modal-header .modal-controls {
   display: flex;
 }
@@ -381,30 +393,45 @@ button {
 }
 
 .modal .modal-header .modal-controls .modal-controls-previous {
+  cursor: pointer;
 }
 
 .modal .modal-header .modal-controls .modal-controls-close {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
 }
 
 .modal .modal-body {
   border-bottom: 1px solid #b3b3b3;
-  padding-bottom: 80px;
+  height: 440px;
   margin: 0 80px;
+  padding-bottom: 20px;
 }
 
 .modal .modal-body #modal_gallery {
-  display: flex;
+  row-gap: 2.5rem;
+  height: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  column-gap: .75rem;
   justify-content: space-between;
-  row-gap: 2rem;
-  flex-wrap: wrap;
+  align-content: start;
+}
+
+.modal .modal-body #modal_gallery .delete-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 17px;
+  cursor: pointer;
 }
 
 .modal .modal-body #modal_gallery > figure {
   display: block;
-  max-width: 17%;
-  max-height: 20%;
+  width: 100%;
+  height: 100px;
   object-fit: contain;
   position: relative;
 }
@@ -413,15 +440,75 @@ button {
   width: 100%;
 }
 
-.modal .modal-body #modal_gallery .edit-icon {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 17px;
+.modal .modal-body #modal_form_container {
+  display: none;
 }
 
-.modal .modal-body .modal_form {
-  display: block;
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container {
+  display: flex;
+  justify-content: center;
+  height: 180px;
+  border-radius: 3px;
+  background-color: #E8F1F6;
+}
+
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container #form_file_input_selected_image {
+  display: none;
+}
+
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container #form_file_input_controls {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 0.5rem;
+  width: 100%;
+}
+
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container label {
+	width: 38%;
+	height: 36px;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+	font-weight: 500;
+	line-height: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #306685;
+  cursor: pointer;
+}
+
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container input {
+  display: none;
+}
+
+.modal .modal-body #modal_form_container #modal_form #form_file_input_container span {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+  color: #444444;
+}
+
+.modal .modal-body #modal_form_container #modal_form .input-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  row-gap: 1rem;
+}
+
+.modal .modal-body #modal_form_container #modal_form .input-container label {
+}
+
+.modal .modal-body #modal_form_container #modal_form .input-container input,
+.modal .modal-body #modal_form_container #modal_form .input-container select {
+  height: 51px;
+  border: none;
+  background: #FFF;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.09);
+  padding: 0 1rem;
+  font-size: 14px;
 }
 
 .modal .modal-footer {
@@ -433,8 +520,13 @@ button {
   color: white;
   background-color: #1d6154;
   width: 40%;
+  cursor: pointer;
 }
 
-.modal .modal-footer #submit_button {
+.modal .modal-footer #open_form_buttom {
   display: block;
+}
+
+.modal .modal-footer #submit_form_button {
+  display: none;
 }

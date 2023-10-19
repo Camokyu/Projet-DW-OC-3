@@ -5,14 +5,19 @@ const bannerContainer = document.getElementById("banner_container");
 onLaunch().then(({ categories, works }) => {
   window.works = works;
   createWorkElements(works);
-  categories.unshift({ id: 0, name: "Tous" });
-  const buttonContainer = document.getElementById("button_container");
+  
   if (!getIsConnected()) {
+    const buttonContainer = document.getElementById("button_container");
+    categories.unshift({ id: 0, name: "Tous" });
     categories.forEach((itemCat) => {
-      let btn = createCategoryButton(itemCat);
+      const btn = createCategoryButton(itemCat);
       btn.addEventListener("click", displayFilteredWorks);
 
       buttonContainer.appendChild(btn);
     });
+  } else {
+    categories.forEach((itemCat) => {
+      createCategoryFormOption(itemCat)
+    })
   }
 });
