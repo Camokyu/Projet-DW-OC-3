@@ -30,6 +30,14 @@ const formFileInput = document.getElementById("form_file_input");
 const submitFormButton = document.getElementById("submit_form_button");
 const modalGalleryTitle = document.getElementById("modal_gallery_title");
 const modalGallery = document.getElementById("modal_gallery");
+const inputTitle = document.getElementById("form_title_input");
+
+inputTitle.addEventListener("input", () => {
+  let titleSize = inputTitle.value.length;
+  titleSize > 1
+    ? submitFormButton.setAttribute("disabled", false)
+    : submitFormButton.setAttribute("disabled", true);
+});
 
 // Events initializers
 modalClose.addEventListener("click", closeModal);
@@ -83,8 +91,8 @@ async function deleteWork(workId) {
     },
   });
 
-  const works = await getWorks();
-  createWorkElements(works);
+//  const works = await getWorks();
+ // createWorkElements(works);  Passer en display none l'élément supprimé
 }
 
 async function submitForm() {
@@ -118,6 +126,8 @@ function closeModal() {
   overlay.style.display = "none";
 
   setIsFormDisplayed(false);
+
+  resetForm();
 }
 
 function openModal() {
@@ -143,7 +153,7 @@ function setIsFormDisplayed(isDisplayed) {
 
 function displaySelectedImage() {
   const file = formFileInput.files[0];
-  
+
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {

@@ -1,5 +1,3 @@
-// const isConnected = getIsConnected();
-// console.log("🚀 ~ file: call_api.js:2 ~ isConnected:", isConnected);
 const bannerContainer = document.getElementById("banner_container");
 
 onLaunch().then(({ categories, works }) => {
