@@ -30,7 +30,15 @@ const formFileInput = document.getElementById("form_file_input");
 const submitFormButton = document.getElementById("submit_form_button");
 const modalGalleryTitle = document.getElementById("modal_gallery_title");
 const modalGallery = document.getElementById("modal_gallery");
+const inputFile = document.getElementById("form_file_input");
 const inputTitle = document.getElementById("form_title_input");
+
+inputFile.addEventListener("input", () => {
+  let fileWeight = inputFile.value.size;
+  fileWeight > 4000000
+  ? submitFormButton.setAttribute("disabled", false)
+  : submitFormButton.setAttribute("disabled", true);
+})
 
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
