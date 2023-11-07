@@ -102,6 +102,7 @@
                       <input id="form_file_input" name="image" type="file" accept=".jpg, .png" required />
                       <span>jpg, png : 4mo max</span>
                     </div>
+                    <span id="input_file_error"></span>
                   </div>
                 </div>
                 <div class="input-container">
@@ -111,12 +112,14 @@
                 <div class="input-container">
                   <label for="form_category_select">Catégorie</label>
                   <select id="form_category_select" name="category" required>
+                    <option value="0">Veuillez choisir votre catégorie</option>
                   </select>
                 </div>
               </form>
             </div>
           </div>
           <div class="modal-footer">
+            <span id=""
             <button id="open_form_buttom">Ajouter une photo</button>
             <button id="submit_form_button" disabled="true">Valider</button>
           </div>
@@ -147,8 +150,8 @@
         </ul>
       </nav>
     </footer>
-    <script src="scripts/utils.js"></script>
     <script src="scripts/auth.js"></script>
+    <script src="scripts/utils.js"></script>
     <script src="scripts/call_api.js"></script>
     <script src="scripts/modal_script.js"></script>
   </body>

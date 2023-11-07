@@ -32,17 +32,35 @@ const modalGalleryTitle = document.getElementById("modal_gallery_title");
 const modalGallery = document.getElementById("modal_gallery");
 const inputFile = document.getElementById("form_file_input");
 const inputTitle = document.getElementById("form_title_input");
+const formSelect = document.getElementById("form_category_select");
 
-inputFile.addEventListener("input", () => {
-  let fileWeight = inputFile.value.size;
-  fileWeight > 4000000
-  ? submitFormButton.setAttribute("disabled", false)
-  : submitFormButton.setAttribute("disabled", true);
-})
+inputFile.addEventListener("input", function (e) {
+  const fileError = document.getElementById("input_file_error");
+  let fileWeight = this.files[0].size;
+  console.log(
+    "🚀 ~ file: utils.js:38 ~ inputFile.addEventListener ~ this.files:",
+    this.files
+  );
+  if (fileWeight < 4000000) {
+    submitFormButton.setAttribute("disabled", false);
+    fileError.innerHTML="";
+  } else {
+    submitFormButton.setAttribute("disabled", true);
+    fileError.innerHTML="Type de fichier incorrect ou fichier trop lourd";
+  }
+});
 
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
   titleSize > 1
+    ? submitFormButton.setAttribute("disabled", false)
+    : submitFormButton.setAttribute("disabled", true);
+});
+
+formSelect.addEventListener("change", (e) => {
+  let idSelectedCategory = e.target.value;
+  console.log("🚀 ~ file: utils.js:62 ~ formSelect.addEventListener ~ idSelectedCategory:", idSelectedCategory)
+  idSelectedCategory !=0
     ? submitFormButton.setAttribute("disabled", false)
     : submitFormButton.setAttribute("disabled", true);
 });
@@ -58,7 +76,7 @@ openFormButton.addEventListener("click", () => {
 });
 formInputSelectedImage.addEventListener("click", () => formFileInput.click());
 formFileInput.addEventListener("change", displaySelectedImage);
-submitFormButton.addEventListener("click", submitForm);
+submitFormButton.addEventListener("click", () => submitForm());
 
 // API utils
 const getData = async (url) => {
@@ -99,22 +117,31 @@ async function deleteWork(workId) {
     },
   });
 
-//  const works = await getWorks();
- // createWorkElements(works);  Passer en display none l'élément supprimé
+  //  const works = await getWorks();
+  // createWorkElements(works);  Passer en display none l'élément supprimé
 }
 
+const checkData = () => {}
 async function submitForm() {
-  const formData = new FormData(modalForm);
-  // Valider champs de formulaire
-  const response = await postWork(formData);
+  const resultCheck = checkData()
+  if(resultCheck){
 
-  if (response.ok) {
-    resetForm();
-    closeModal();
-    const works = await getWorks();
-    createWorkElements(works);
-  } else {
-    // Gérer cas d'erreur
+    const formData = new FormData(modalForm);
+  
+    console.log("Je suis passé ! ^-^")
+    const response = await postWork(formData);
+  
+    if (response.ok) {
+      resetForm();
+      closeModal();
+      const works = await getWorks();
+      createWorkElements(works);
+    } else {
+      // Gérer cas d'erreur
+    }
+  }
+  else {
+    
   }
 }
 
@@ -238,6 +265,8 @@ function getAndUpateCategory(ev) {
 
   return ev.target.dataset.id;
 }
+
+// Creation of options for the form's select
 
 function createCategoryFormOption(category) {
   const option = document.createElement("option");

@@ -341,10 +341,6 @@ button {
   align-items: center;
 }
 
-/* #banner_text {
-
-} */
-
 .modal {
   position: fixed;
   top: 50%;
@@ -498,8 +494,8 @@ button {
   row-gap: 1rem;
 }
 
-.modal .modal-body #modal_form_container #modal_form .input-container label {
-}
+/* .modal .modal-body #modal_form_container #modal_form .input-container label {
+} */
 
 .modal .modal-body #modal_form_container #modal_form .input-container input,
 .modal .modal-body #modal_form_container #modal_form .input-container select {

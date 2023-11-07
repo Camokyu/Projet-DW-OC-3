@@ -1,5 +1,5 @@
 function getAuthToken() {
-  return localStorage.getItem("token")
+  return sessionStorage.getItem("token")
 }
 
 function getIsConnected() {
@@ -7,6 +7,6 @@ function getIsConnected() {
 }
 
 function removeAuthToken() {
-  localStorage.removeItem("token");
+  sessionStorage.removeItem("token");
   window.location.reload(false);
 }

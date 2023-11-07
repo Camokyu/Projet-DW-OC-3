@@ -31,13 +31,13 @@ function submitForm(event) {
     })
     .then((responseData) => {
       const authToken = responseData.token;
-      localStorage.setItem("token", authToken);
+      sessionStorage.setItem("token", authToken);
       window.location.href = "index.html";
       console.log(responseData);
     })
     .catch((error) => {
       console.error("Erreur de la requête:", error);
       document.getElementById("message").textContent = error.message;
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     });
 }
