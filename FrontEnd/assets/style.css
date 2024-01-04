@@ -144,6 +144,10 @@ header nav li {
   cursor: pointer;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 section {
   margin: 50px 0;
 }
@@ -384,7 +388,7 @@ button {
   display: flex;
 }
 
-.modal .modal-header .modal-controls> div{
+.modal .modal-header .modal-controls > div {
   flex-grow: 1;
 }
 
@@ -411,7 +415,7 @@ button {
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 80px);
-  column-gap: .75rem;
+  column-gap: 0.75rem;
   justify-content: space-between;
   align-content: start;
 }
@@ -440,19 +444,33 @@ button {
   display: none;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container {
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container {
   display: flex;
   justify-content: center;
   height: 180px;
   border-radius: 3px;
-  background-color: #E8F1F6;
+  background-color: #e8f1f6;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container #form_file_input_selected_image {
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container
+  #form_file_input_selected_image {
   display: none;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container #form_file_input_controls {
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container
+  #form_file_input_controls {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -462,28 +480,43 @@ button {
   width: 100%;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container label {
-	width: 38%;
-	height: 36px;
-	border-radius: 50px;
-	background-color: #CBD6DC;
-	font-weight: 500;
-	line-height: 16px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #306685;
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container
+  label {
+  width: 38%;
+  height: 36px;
+  border-radius: 50px;
+  background-color: #cbd6dc;
+  font-weight: 500;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #306685;
   cursor: pointer;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container input {
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container
+  input {
   display: none;
 }
 
-.modal .modal-body #modal_form_container #modal_form #form_file_input_container span {
-	font-size: 10px;
-	font-weight: 400;
-	line-height: 12px;
+.modal
+  .modal-body
+  #modal_form_container
+  #modal_form
+  #form_file_input_container
+  span {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
   color: #444444;
 }
 
@@ -501,7 +534,7 @@ button {
 .modal .modal-body #modal_form_container #modal_form .input-container select {
   height: 51px;
   border: none;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.09);
   padding: 0 1rem;
   font-size: 14px;

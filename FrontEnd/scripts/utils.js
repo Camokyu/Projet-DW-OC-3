@@ -18,7 +18,7 @@ const modalClose = document.getElementById("modal_close_icon");
 const modalPreviousIcon = document.getElementById("modal_previous_icon");
 const modalFormContainer = document.getElementById("modal_form_container");
 const modalForm = document.getElementById("modal_form");
-const openFormButton = document.getElementById("open_form_buttom");
+const openFormButton = document.getElementById("open_form_button");
 const formTitle = document.getElementById("modal_form_title");
 const formInputSelectedImage = document.getElementById(
   "form_file_input_selected_image"
