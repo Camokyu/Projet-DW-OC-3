@@ -1,17 +1,21 @@
-// Page init
 // Login page
+
 const loginButton = document.getElementById("login_button");
 const logoutButton = document.getElementById("logout_button");
 
 logoutButton.addEventListener("click", logout);
 
+
 // Main page
+
 const editModeBanner = document.getElementById("edit_mode_banner");
 const modalTrigger = document.getElementById("modal_trigger");
 
 modalTrigger.addEventListener("click", openModal);
 
+
 // Modal
+
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
 const modalClose = document.getElementById("modal_close_icon");
@@ -65,7 +69,9 @@ formSelect.addEventListener("change", (e) => {
     : submitFormButton.setAttribute("disabled", true);
 });
 
+
 // Events initializers
+
 modalClose.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 modalPreviousIcon.addEventListener("click", () => {
@@ -78,7 +84,9 @@ formInputSelectedImage.addEventListener("click", () => formFileInput.click());
 formFileInput.addEventListener("change", displaySelectedImage);
 submitFormButton.addEventListener("click", () => submitForm());
 
+
 // API utils
+
 const getData = async (url) => {
   const response = await (await fetch(url)).json();
   return response;
@@ -150,12 +158,16 @@ function resetForm() {
   displaySelectedImage();
 }
 
+
 // Login utils
+
 function logout() {
   removeAuthToken();
 }
 
+
 // DOM manipulation utils
+
 function closeModal() {
   modal.style.display = "none";
   overlay.style.display = "none";
@@ -265,6 +277,7 @@ function getAndUpateCategory(ev) {
 
   return ev.target.dataset.id;
 }
+
 
 // Creation of options for the form's select
 
