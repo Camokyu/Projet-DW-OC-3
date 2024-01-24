@@ -320,6 +320,15 @@ button {
   gap: 20px;
 }
 
+.loginFormInputContainers {
+  height: 51px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.09);
+  padding: 0 1rem;
+  font-size: 14px;
+}
+
 #modal_trigger {
   display: none;
   cursor: pointer;
@@ -526,9 +535,6 @@ button {
   margin: 2rem 0;
   row-gap: 1rem;
 }
-
-/* .modal .modal-body #modal_form_container #modal_form .input-container label {
-} */
 
 .modal .modal-body #modal_form_container #modal_form .input-container input,
 .modal .modal-body #modal_form_container #modal_form .input-container select {
