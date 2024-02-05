@@ -242,33 +242,33 @@ button.active {
 .gallery img {
   width: 100%;
 }
-#contact {
+.form_container {
   width: 50%;
   margin: auto;
 }
-#contact > * {
+.form_container > * {
   text-align: center;
 }
-#contact h2 {
+.form_container h2 {
   margin-bottom: 20px;
 }
-#contact form {
+.form_container form {
   text-align: left;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
-#contact input {
+.form_container input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+.form_container label {
   margin: 2em 0 1em 0;
 }
-#contact textarea {
+.form_container textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -311,22 +311,6 @@ button {
   margin-left: 20%;
   width: 60%;
   gap: 20px;
-}
-
-.login_form {
-  display: flex;
-  flex-flow: column wrap;
-  align-content: center;
-  gap: 20px;
-}
-
-.loginFormInputContainers {
-  height: 51px;
-  border: none;
-  background: #fff;
-  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.09);
-  padding: 0 1rem;
-  font-size: 14px;
 }
 
 #modal_trigger {

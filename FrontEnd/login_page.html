@@ -27,13 +27,13 @@
       </nav>
     </header>
     <main>
-      <section class="login_form">
+      <section class="form_container" id="login_form_container">
         <h2>Log in</h2>
 
-        <div id="message"></div>
+        <div id="login_error_message"></div>
 
-        <form id="loginForm" onsubmit="submitForm(event)">
-          <div id="loginFormInputContainers">
+        <form id="login_form" onsubmit="submitForm(event)">
+          <div id="login_form_input_containers">
             <div>
               <label for="email">Email</label>
               <input
