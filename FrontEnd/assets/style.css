@@ -186,6 +186,16 @@ nav li {
 li:hover {
   color: #b1663c;
 }
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+#login_button>:active{
+  font-weight: bold;
+} 
+
 #introduction {
   display: flex;
   align-items: center;

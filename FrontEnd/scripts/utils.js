@@ -118,6 +118,7 @@ function postWork(formData) {
 }
 
 async function deleteWork(workId) {
+  console.log("🚀 ~ deleteWork ~ workId:", workId)
   await fetch(`http://localhost:5678/api/works/${workId}`, {
     method: "DELETE",
     headers: {
@@ -238,9 +239,9 @@ function createWorkElement(work) {
   const deleteItemIcon = document.createElement("img");
   deleteItemIcon.className = "delete-icon";
   deleteItemIcon.src = "./assets/icons/delete_icon.png";
-  deleteItemIcon.onclick = (e) => {
+  deleteItemIcon.onclick = async (e) => {
     e.preventDefault();
-    deleteWork(work.id);
+    await deleteWork(work.id);
   };
 
   const gallery = document.getElementById("gallery");
