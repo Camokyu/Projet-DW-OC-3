@@ -37,6 +37,9 @@ const modalGallery = document.getElementById("modal_gallery");
 const inputFile = document.getElementById("form_file_input");
 const inputTitle = document.getElementById("form_title_input");
 const formSelect = document.getElementById("form_category_select");
+let fileInputCheck = false;
+let titleInputCheck = false;
+let formSelectCheck = false;
 
 inputFile.addEventListener("input", function (e) {
   const fileError = document.getElementById("input_file_error");
@@ -45,11 +48,13 @@ inputFile.addEventListener("input", function (e) {
     "🚀 ~ file: utils.js:38 ~ inputFile.addEventListener ~ this.files:",
     this.files
   );
-  if (fileWeight < 4000000) {
-    submitFormButton.setAttribute("disabled", false);
+  if (fileWeight <= 4000000) {
+    // submitFormButton.setAttribute("disabled", false);
+    fileInputCheck = true;
     fileError.innerHTML="";
   } else {
-    submitFormButton.setAttribute("disabled", true);
+    // submitFormButton.setAttribute("disabled", true);
+    fileInputCheck = false;
     fileError.innerHTML="Type de fichier incorrect ou fichier trop lourd";
   }
 });
@@ -57,16 +62,20 @@ inputFile.addEventListener("input", function (e) {
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
   titleSize > 1
-    ? submitFormButton.setAttribute("disabled", false)
-    : submitFormButton.setAttribute("disabled", true);
+    // ? submitFormButton.setAttribute("disabled", false)
+    // : submitFormButton.setAttribute("disabled", true);
+    ? inputTitleCheck = true
+    : inputTitleCheck = false;
 });
 
 formSelect.addEventListener("change", (e) => {
   let idSelectedCategory = e.target.value;
   console.log("🚀 ~ file: utils.js:62 ~ formSelect.addEventListener ~ idSelectedCategory:", idSelectedCategory)
   idSelectedCategory !=0
-    ? submitFormButton.setAttribute("disabled", false)
-    : submitFormButton.setAttribute("disabled", true);
+  //   ? submitFormButton.setAttribute("disabled", false)
+  //   : submitFormButton.setAttribute("disabled", true);
+  ? formSelectCheck = true
+  : formSelectCheck = false;
 });
 
 
@@ -82,8 +91,13 @@ openFormButton.addEventListener("click", () => {
 });
 formInputSelectedImage.addEventListener("click", () => formFileInput.click());
 formFileInput.addEventListener("change", displaySelectedImage);
-submitFormButton.addEventListener("click", () => submitForm());
-
+console.log("🚀 ~ submitFormButton:", submitFormButton)
+submitFormButton.addEventListener("click", () => {
+  console.log("Vérif", inputFile.value, inputTitle.value, formSelect.value)
+  console.log("Check inputFile", fileInputCheck)
+  console.log("Check inputTitle", titleInputCheck)
+  console.log("Check inputFile", fileInputCheck)
+})
 
 // API utils
 
@@ -130,7 +144,9 @@ async function deleteWork(workId) {
   // createWorkElements(works);  Passer en display none l'élément supprimé
 }
 
-const checkData = () => {}
+const checkData = () => {
+  console.log("Test !")
+}
 async function submitForm() {
   const resultCheck = checkData()
   if(resultCheck){
