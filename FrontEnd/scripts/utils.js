@@ -79,6 +79,24 @@ formSelect.addEventListener("change", (e) => {
 });
 
 
+// function modalFormOnSubmitVerification{
+//   if (fileInputCheck = true & inputTitleCheck = true & formSelectCheck = true){
+//     submitFormButton.setAttribute("disabled", false);
+//   }
+//   else{
+//     submitFormButton.setAttribute("disabled", true);
+//   }
+//   }
+
+submitFormButton.addEventListener("click", function(){
+  if (fileInputCheck = true & inputTitleCheck = true & formSelectCheck = true){
+    submitFormButton.setAttribute("disabled", false);
+  }
+  else{
+    submitFormButton.setAttribute("disabled", true);
+  }
+});
+
 // Events initializers
 
 modalClose.addEventListener("click", closeModal);
