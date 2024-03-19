@@ -5,14 +5,12 @@ const logoutButton = document.getElementById("logout_button");
 
 logoutButton.addEventListener("click", logout);
 
-
 // Main page
 
 const editModeBanner = document.getElementById("edit_mode_banner");
 const modalTrigger = document.getElementById("modal_trigger");
 
 modalTrigger.addEventListener("click", openModal);
-
 
 // Modal
 
@@ -51,49 +49,43 @@ inputFile.addEventListener("input", function (e) {
   if (fileWeight <= 4000000) {
     // submitFormButton.setAttribute("disabled", false);
     fileInputCheck = true;
-    fileError.innerHTML="";
+    fileError.innerHTML = "";
   } else {
     // submitFormButton.setAttribute("disabled", true);
     fileInputCheck = false;
-    fileError.innerHTML="Type de fichier incorrect ou fichier trop lourd";
+    fileError.innerHTML = "Type de fichier incorrect ou fichier trop lourd";
   }
 });
 
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
   titleSize > 1
-    // ? submitFormButton.setAttribute("disabled", false)
-    // : submitFormButton.setAttribute("disabled", true);
-    ? inputTitleCheck = true
-    : inputTitleCheck = false;
+    ? // ? submitFormButton.setAttribute("disabled", false)
+      // : submitFormButton.setAttribute("disabled", true);
+      (titleInputCheck = true)
+    : (titleInputCheck = false);
 });
 
 formSelect.addEventListener("change", (e) => {
   let idSelectedCategory = e.target.value;
-  console.log("🚀 ~ file: utils.js:62 ~ formSelect.addEventListener ~ idSelectedCategory:", idSelectedCategory)
-  idSelectedCategory !=0
-  //   ? submitFormButton.setAttribute("disabled", false)
-  //   : submitFormButton.setAttribute("disabled", true);
-  ? formSelectCheck = true
-  : formSelectCheck = false;
+  console.log(
+    "🚀 ~ file: utils.js:62 ~ formSelect.addEventListener ~ idSelectedCategory:",
+    idSelectedCategory
+  );
+  idSelectedCategory != 0
+    ? //   ? submitFormButton.setAttribute("disabled", false)
+      //   : submitFormButton.setAttribute("disabled", true);
+      (formSelectCheck = true)
+    : (formSelectCheck = false);
 });
 
-
-// function modalFormOnSubmitVerification{
-//   if (fileInputCheck = true & inputTitleCheck = true & formSelectCheck = true){
-//     submitFormButton.setAttribute("disabled", false);
-//   }
-//   else{
-//     submitFormButton.setAttribute("disabled", true);
-//   }
-//   }
-
 submitFormButton.addEventListener("click", function(){
-  if (fileInputCheck = true & inputTitleCheck = true & formSelectCheck = true){
-    submitFormButton.setAttribute("disabled", false);
+  if (fileInputCheck == true & titleInputCheck == true & formSelectCheck == true){
+   submitForm();
+   console.log("POST executé !")
   }
   else{
-    submitFormButton.setAttribute("disabled", true);
+    console.log("message d'erreur");
   }
 });
 
@@ -109,13 +101,13 @@ openFormButton.addEventListener("click", () => {
 });
 formInputSelectedImage.addEventListener("click", () => formFileInput.click());
 formFileInput.addEventListener("change", displaySelectedImage);
-console.log("🚀 ~ submitFormButton:", submitFormButton)
+console.log("🚀 ~ submitFormButton:", submitFormButton);
 submitFormButton.addEventListener("click", () => {
-  console.log("Vérif", inputFile.value, inputTitle.value, formSelect.value)
-  console.log("Check inputFile", fileInputCheck)
-  console.log("Check inputTitle", titleInputCheck)
-  console.log("Check inputFile", fileInputCheck)
-})
+  console.log("Vérif", inputFile.value, inputTitle.value, formSelect.value);
+  console.log("Check inputFile", fileInputCheck);
+  console.log("Check inputTitle", titleInputCheck);
+  console.log("Check inputFile", fileInputCheck);
+});
 
 // API utils
 
@@ -150,7 +142,7 @@ function postWork(formData) {
 }
 
 async function deleteWork(workId) {
-  console.log("🚀 ~ deleteWork ~ workId:", workId)
+  console.log("🚀 ~ deleteWork ~ workId:", workId);
   await fetch(`http://localhost:5678/api/works/${workId}`, {
     method: "DELETE",
     headers: {
@@ -158,22 +150,29 @@ async function deleteWork(workId) {
     },
   });
 
-  //  const works = await getWorks();
-  // createWorkElements(works);  Passer en display none l'élément supprimé
+  const figuresToDelete = document.querySelectorAll(
+    `figure[data-id="${workId}"]`
+  );
+
+  console.log("🚀 ~ deleteWork ~ figuresToDelete:", figuresToDelete);
+  figuresToDelete.forEach((figure) => {
+    figure.style.display = "none";
+  });
 }
 
 const checkData = () => {
-  console.log("Test !")
-}
+  console.log("Test !");
+  return true;
+};
 async function submitForm() {
-  const resultCheck = checkData()
-  if(resultCheck){
-
+  const resultCheck = checkData();
+  if (resultCheck) {
+    console.log(modalForm, "log modalForm");
     const formData = new FormData(modalForm);
-  
-    console.log("Je suis passé ! ^-^")
+
+    console.log("Je suis passé ! ^-^");
     const response = await postWork(formData);
-  
+
     if (response.ok) {
       resetForm();
       closeModal();
@@ -181,10 +180,9 @@ async function submitForm() {
       createWorkElements(works);
     } else {
       // Gérer cas d'erreur
+      console.log("Une erreur s'est produite ou une saisie est incorrecte !")
     }
-  }
-  else {
-    
+  } else {
   }
 }
 
@@ -193,13 +191,11 @@ function resetForm() {
   displaySelectedImage();
 }
 
-
 // Login utils
 
 function logout() {
   removeAuthToken();
 }
-
 
 // DOM manipulation utils
 
@@ -265,6 +261,8 @@ function createWorkElement(work) {
 
   const figure = document.createElement("figure");
   const modalFigure = figure.cloneNode();
+  figure.dataset.id = work.id;
+  modalFigure.dataset.id = work.id;
   const img = document.createElement("img");
   img.alt = title;
   img.src = imageUrl;
@@ -312,7 +310,6 @@ function getAndUpateCategory(ev) {
 
   return ev.target.dataset.id;
 }
-
 
 // Creation of options for the form's select
 
