@@ -29,7 +29,7 @@ const formFileInputControls = document.getElementById(
   "form_file_input_controls"
 );
 const formFileInput = document.getElementById("form_file_input");
-const submitFormButton = document.getElementById("submit_form_button");
+//const submitFormButton = document.getElementById("submit_form_button");
 const modalGalleryTitle = document.getElementById("modal_gallery_title");
 const modalGallery = document.getElementById("modal_gallery");
 const inputFile = document.getElementById("form_file_input");
@@ -38,6 +38,7 @@ const formSelect = document.getElementById("form_category_select");
 let fileInputCheck = false;
 let titleInputCheck = false;
 let formSelectCheck = false;
+let  submitFormButton = document.getElementById("submit_form_button").disabled = true; 
 
 inputFile.addEventListener("input", function (e) {
   const fileError = document.getElementById("input_file_error");
@@ -47,11 +48,9 @@ inputFile.addEventListener("input", function (e) {
     this.files
   );
   if (fileWeight <= 4000000) {
-    // submitFormButton.setAttribute("disabled", false);
     fileInputCheck = true;
     fileError.innerHTML = "";
   } else {
-    // submitFormButton.setAttribute("disabled", true);
     fileInputCheck = false;
     fileError.innerHTML = "Type de fichier incorrect ou fichier trop lourd";
   }
@@ -59,11 +58,7 @@ inputFile.addEventListener("input", function (e) {
 
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
-  titleSize > 1
-    ? // ? submitFormButton.setAttribute("disabled", false)
-      // : submitFormButton.setAttribute("disabled", true);
-      (titleInputCheck = true)
-    : (titleInputCheck = false);
+  titleSize > 1 ? (titleInputCheck = true) : (titleInputCheck = false);
 });
 
 formSelect.addEventListener("change", (e) => {
@@ -73,23 +68,20 @@ formSelect.addEventListener("change", (e) => {
     idSelectedCategory
   );
   idSelectedCategory != 0
-    ? //   ? submitFormButton.setAttribute("disabled", false)
-      //   : submitFormButton.setAttribute("disabled", true);
-      (formSelectCheck = true)
+    ? (formSelectCheck = true)
     : (formSelectCheck = false);
 });
 
-submitFormButton.addEventListener("click", function(){
-  if (fileInputCheck == true & titleInputCheck == true & formSelectCheck == true){
-   submitForm();
-   console.log("POST executé !")
-  }
-  else{
+submitFormButton.addEventListener("click", function () {
+  if (fileInputCheck & titleInputCheck & formSelectCheck) {
+    submitForm();
+    console.log("POST executé !");
+  } else {
     console.log("message d'erreur");
   }
 });
 
-// Events initializers
+// Event initializers
 
 modalClose.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
@@ -132,6 +124,7 @@ function getCategories() {
 }
 
 function postWork(formData) {
+  console.log("🚀 ~ postWork ~ formData:", formData);
   return fetch("http://localhost:5678/api/works", {
     body: formData,
     headers: {
@@ -160,29 +153,21 @@ async function deleteWork(workId) {
   });
 }
 
-const checkData = () => {
-  console.log("Test !");
-  return true;
-};
 async function submitForm() {
-  const resultCheck = checkData();
-  if (resultCheck) {
-    console.log(modalForm, "log modalForm");
-    const formData = new FormData(modalForm);
+  console.log(modalForm, "log modalForm");
+  const formData = new FormData(modalForm);
 
-    console.log("Je suis passé ! ^-^");
-    const response = await postWork(formData);
+  console.log("Je suis passé ! ^-^");
+  const response = await postWork(formData);
 
-    if (response.ok) {
-      resetForm();
-      closeModal();
-      const works = await getWorks();
-      createWorkElements(works);
-    } else {
-      // Gérer cas d'erreur
-      console.log("Une erreur s'est produite ou une saisie est incorrecte !")
-    }
+  if (response.ok) {
+    resetForm();
+    closeModal();
+    const works = await getWorks();
+    createWorkElements(works);
   } else {
+    // Gérer cas d'erreur
+    console.log("Une erreur s'est produite ou une saisie est incorrecte !");
   }
 }
 
