@@ -198,8 +198,8 @@ a:active{
   font-weight: bold;
 }
 
-#login_button>:active{
-  font-weight: bold;
+.current_page_link{
+  font-weight: 600;
 } 
 
 #introduction {
@@ -319,6 +319,11 @@ button {
   border-style: solid;
   border-width: 1px;
   border-color: #1d6154;
+}
+
+.modal .modal-footer button:disabled {
+border-color: #A7A7A7;
+background-color: #A7A7A7;
 }
 
 #button_container {

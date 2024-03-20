@@ -29,7 +29,7 @@ const formFileInputControls = document.getElementById(
   "form_file_input_controls"
 );
 const formFileInput = document.getElementById("form_file_input");
-//const submitFormButton = document.getElementById("submit_form_button");
+const submitFormButton = document.getElementById("submit_form_button");
 const modalGalleryTitle = document.getElementById("modal_gallery_title");
 const modalGallery = document.getElementById("modal_gallery");
 const inputFile = document.getElementById("form_file_input");
@@ -38,11 +38,12 @@ const formSelect = document.getElementById("form_category_select");
 let fileInputCheck = false;
 let titleInputCheck = false;
 let formSelectCheck = false;
-let  submitFormButton = document.getElementById("submit_form_button").disabled = true; 
 
 inputFile.addEventListener("input", function (e) {
   const fileError = document.getElementById("input_file_error");
   let fileWeight = this.files[0].size;
+  let uploadedFile = this.files[0];
+  let fileReader = new FileReader(); 
   console.log(
     "🚀 ~ file: utils.js:38 ~ inputFile.addEventListener ~ this.files:",
     this.files
@@ -52,13 +53,40 @@ inputFile.addEventListener("input", function (e) {
     fileError.innerHTML = "";
   } else {
     fileInputCheck = false;
-    fileError.innerHTML = "Type de fichier incorrect ou fichier trop lourd";
+    fileError.innerHTML = "Fichier trop lourd";
   }
+  let mimeCheckArray = (new Uint8Array(e.target.result)).subarray(0, 16);
+  let mimeHeader = "";
+  fileReader.onloadend = function(e){
+    mimeHeader = mimeCheckArray.toString(16);
+    console.log("Log mimeHeader", mimeHeader);
+    fileReader.readAsArrayBuffer(uploadedFile);
+    switch(mimeHeader){
+      case "89 50 4E 47 0D 0A 1A 0A" :
+        type = "image/png";
+        break;
+    case "FF D8 FF E0" :
+        type = "image/jpg";
+        break;
+    }
+    if(type == "image/png" || type == "image/jpg"){
+      fileInputCheck = true;
+      fileError.innerHTML = "";
+      console.log("Type de fichier correct !! HOURRA !!!!")
+    }
+    else {
+      fileInputCheck = false;
+      fileError.innerHTML = "Type de fichier incorrect";
+      console.log("Type de fichier incorrect ! HOURRA !!!!");
+    }
+  }
+  updateSubmitButtonStatus();
 });
 
 inputTitle.addEventListener("input", () => {
   let titleSize = inputTitle.value.length;
   titleSize > 1 ? (titleInputCheck = true) : (titleInputCheck = false);
+  updateSubmitButtonStatus();
 });
 
 formSelect.addEventListener("change", (e) => {
@@ -70,6 +98,7 @@ formSelect.addEventListener("change", (e) => {
   idSelectedCategory != 0
     ? (formSelectCheck = true)
     : (formSelectCheck = false);
+  updateSubmitButtonStatus();
 });
 
 submitFormButton.addEventListener("click", function () {
@@ -80,6 +109,15 @@ submitFormButton.addEventListener("click", function () {
     console.log("message d'erreur");
   }
 });
+
+function updateSubmitButtonStatus() {
+  if (fileInputCheck & titleInputCheck & formSelectCheck) {
+    submitFormButton.disabled = false;
+  } else {
+    submitFormButton.disabled = true;
+    console.log("Tu te fais Gandalfer");
+  }
+}
 
 // Event initializers
 
@@ -98,7 +136,7 @@ submitFormButton.addEventListener("click", () => {
   console.log("Vérif", inputFile.value, inputTitle.value, formSelect.value);
   console.log("Check inputFile", fileInputCheck);
   console.log("Check inputTitle", titleInputCheck);
-  console.log("Check inputFile", fileInputCheck);
+  console.log("Check formSelect", formSelectCheck);
 });
 
 // API utils
